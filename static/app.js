@@ -17,14 +17,20 @@ form.addEventListener("submit", function (e) {
             console.log(data);
             const colors = data.colors;
             const container = document.querySelector(".container");
+            container.innerHTML = '';
             for (const color of colors) {
                 const div = document.createElement("div");
                 div.classList.add("color");
                 div.style.backgroundColor = color;
                 div.style.width = `calc(100%/${colors.length})`
 
-                container.appendChild(div)
+                div.addEventListener("click", function () {
+                    navigator.clipboard.writeText(color);
+                })
+                const span = document.createElement("span");
+                span.innerHTML = color;
+                div.appendChild(span);
+                container.appendChild(div);
             }
-
         })
 });
